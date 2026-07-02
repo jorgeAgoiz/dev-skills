@@ -1,12 +1,60 @@
-# API to Bruno
+# Use Bruno Skills
 
-[![skills.sh](https://skills.sh/b/jorgeAgoiz/api-to-bruno)](https://skills.sh/jorgeAgoiz/api-to-bruno)
+[![skills.sh](https://skills.sh/b/jorgeAgoiz/use-bruno-skills)](https://skills.sh/jorgeAgoiz/use-bruno-skills)
 
-Generate a classic [Bruno](https://www.usebruno.com/) `.bru` collection from an API repository, local API project, OpenAPI/Swagger document, or WSDL contract.
+A collection of agent skills for working with [Bruno](https://www.usebruno.com/) collections, requests, and API workflows.
 
-This skill is built for agents that need to turn API surface area into usable Bruno requests without guessing, leaking secrets, or running untrusted tooling silently.
+This repository is organized as a skills collection. Each skill lives under `skills/<skill-name>/` with its own `SKILL.md` and any supporting reference files it needs.
 
-## What It Does
+## Available Skills
+
+| Skill | Purpose |
+| --- | --- |
+| [`api-to-bruno`](skills/api-to-bruno/SKILL.md) | Generate a classic Bruno `.bru` collection from an API repository, local API project, OpenAPI/Swagger document, or WSDL contract. |
+
+## Install
+
+Install the collection with the `skills` CLI:
+
+```bash
+npx skills add jorgeAgoiz/use-bruno-skills
+```
+
+Install only `api-to-bruno` from this repository:
+
+```bash
+npx skills add https://github.com/jorgeAgoiz/use-bruno-skills --skill api-to-bruno
+```
+
+Browse the repository on skills.sh:
+
+```text
+https://skills.sh/jorgeAgoiz/use-bruno-skills
+```
+
+Browse the `api-to-bruno` skill page:
+
+```text
+https://skills.sh/jorgeAgoiz/use-bruno-skills/api-to-bruno
+```
+
+## Repository Structure
+
+```text
+.
++-- README.md
++-- LICENSE
+`-- skills/
+    `-- api-to-bruno/
+        +-- SKILL.md
+        `-- BRUNO.md
+```
+
+## api-to-bruno
+
+`api-to-bruno` turns API surface area into usable Bruno requests without guessing, leaking secrets, or running untrusted tooling silently.
+
+What it does:
 
 - Finds OpenAPI, Swagger, or WSDL contracts before reading application code.
 - Falls back to source-code route inventory when no formal contract exists.
@@ -14,33 +62,7 @@ This skill is built for agents that need to turn API surface area into usable Br
 - Maps path params, query params, headers, auth hints, and request bodies when there is evidence in the contract or code.
 - Verifies the generated collection structure without sending API traffic by default.
 
-## Why Use It
-
-API projects often have usable routes spread across contracts, controllers, decorators, route files, DTOs, validators, framework conventions, and docs. This skill gives the agent a deterministic process:
-
-1. Resolve the API source.
-2. Prefer the formal API contract.
-3. Inventory routes when no contract exists.
-4. Generate Bruno files from the inventory.
-5. Verify the output without calling the API.
-
-The leading behavior is **inventory first**: collect what exists, mark unknowns explicitly, then generate files from that evidence.
-
-## Install
-
-Install with the `skills` CLI:
-
-```bash
-npx skills add jorgeAgoiz/api-to-bruno
-```
-
-Or browse it on skills.sh:
-
-```text
-https://skills.sh/jorgeAgoiz/api-to-bruno
-```
-
-## Example Prompts
+Example prompts:
 
 ```text
 Generate a Bruno collection from https://github.com/acme/payments-api
@@ -58,15 +80,15 @@ Create Bruno requests from https://example.com/openapi.yaml
 Generate a Bruno collection from this NestJS API. Do not run the server.
 ```
 
-## Supported Sources
+## api-to-bruno Discovery
+
+Supported sources:
 
 - Git repository URLs.
 - Local API project paths.
 - Direct OpenAPI or Swagger URLs.
 - Direct WSDL URLs.
 - Repositories with route definitions but no contract.
-
-## Supported API Discovery
 
 Contract-first discovery:
 
@@ -86,7 +108,7 @@ Source inventory discovery:
 - Go routers such as Gin, Echo, chi, and `net/http`.
 - GraphQL schemas and resolvers.
 
-## Output
+## api-to-bruno Output
 
 The generated collection uses Bruno's classic `.bru` format:
 
@@ -104,7 +126,9 @@ Each request includes a `meta` block and one HTTP method block. Path parameters 
 
 ## Safety Model
 
-This skill is intentionally conservative:
+The skills in this repository should favor static analysis, explicit user approval, and safe placeholders over silent execution or speculation.
+
+For `api-to-bruno` specifically:
 
 - It does not send API requests unless the user explicitly asks.
 - It does not install dependencies or start servers unless static analysis is insufficient and the user approves.
@@ -113,13 +137,20 @@ This skill is intentionally conservative:
 - Approval requests must include the exact pinned command, version or image tag, risk note, working directory, and reason.
 - Secrets from `.env`, config files, tokens, API keys, or cookies must never be copied into generated requests.
 
-When remote tooling is not approved, the skill generates `.bru` files manually from the contract or route inventory.
+When remote tooling is not approved, `api-to-bruno` generates `.bru` files manually from the contract or route inventory.
 
-## Repository Contents
+## Adding Skills
 
-- [`SKILL.md`](SKILL.md): agent-facing workflow and invocation metadata.
-- [`BRUNO.md`](BRUNO.md): Bruno format reference, import commands, mapping rules, and safety rules.
+Future skills should be added under `skills/<skill-name>/`:
 
-## Status
+```text
+skills/<skill-name>/
+  SKILL.md
+  reference-or-supporting-files.md
+```
 
-This skill is designed for practical API-to-Bruno generation and favors correctness over speculation. Unknown route details are reported as unresolved assumptions instead of being invented.
+Keep skill-specific reference files next to the skill that uses them, and update the Available Skills table when adding a new skill.
+
+## License
+
+MIT. See [`LICENSE`](LICENSE).
