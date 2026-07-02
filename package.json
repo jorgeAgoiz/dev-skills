@@ -1,7 +1,7 @@
 {
   "name": "dev-skills",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A collection of agent skills for software development.",
   "scripts": {
     "changeset": "changeset",
