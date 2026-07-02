@@ -1,0 +1,15 @@
+{
+  "name": "dev-skills",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A collection of agent skills for software development.",
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset tag"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0",
+    "@changesets/changelog-github": "^0.5.0"
+  }
+}
