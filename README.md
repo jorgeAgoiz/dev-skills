@@ -1,8 +1,8 @@
-# Use Bruno Skills
+# Dev Skills
 
-[![skills.sh](https://skills.sh/b/jorgeAgoiz/use-bruno-skills)](https://skills.sh/jorgeAgoiz/use-bruno-skills)
+[![skills.sh](https://skills.sh/b/jorgeAgoiz/dev-skills)](https://skills.sh/jorgeAgoiz/dev-skills)
 
-A collection of agent skills for working with [Bruno](https://www.usebruno.com/) collections, requests, and API workflows.
+A collection of agent skills for software development. Each skill provides specialized instructions and workflows for specific tasks.
 
 This repository is organized as a skills collection. Each skill lives under `skills/<skill-name>/` with its own `SKILL.md` and any supporting reference files it needs.
 
@@ -10,49 +10,33 @@ This repository is organized as a skills collection. Each skill lives under `ski
 
 | Skill | Purpose |
 | --- | --- |
-| [`api-to-bruno`](skills/api-to-bruno/SKILL.md) | Generate a classic Bruno `.bru` collection from an API repository, local API project, OpenAPI/Swagger document, or WSDL contract. |
+| [`api-to-bruno`](skills/api-to-bruno/SKILL.md) | Generate Bruno collections from APIs, OpenAPI/Swagger, or WSDL contracts. |
 
 ## Install
 
 Install the collection with the `skills` CLI:
 
 ```bash
-npx skills add jorgeAgoiz/use-bruno-skills
+npx skills add jorgeAgoiz/dev-skills
 ```
 
-Install only `api-to-bruno` from this repository:
+Install only a specific skill:
 
 ```bash
-npx skills add https://github.com/jorgeAgoiz/use-bruno-skills --skill api-to-bruno
+npx skills add https://github.com/jorgeAgoiz/dev-skills --skill api-to-bruno
 ```
 
 Browse the repository on skills.sh:
 
 ```text
-https://skills.sh/jorgeAgoiz/use-bruno-skills
+https://skills.sh/jorgeAgoiz/dev-skills
 ```
 
-Browse the `api-to-bruno` skill page:
+## Skills
 
-```text
-https://skills.sh/jorgeAgoiz/use-bruno-skills/api-to-bruno
-```
+### api-to-bruno
 
-## Repository Structure
-
-```text
-.
-+-- README.md
-+-- LICENSE
-`-- skills/
-    `-- api-to-bruno/
-        +-- SKILL.md
-        `-- BRUNO.md
-```
-
-## api-to-bruno
-
-`api-to-bruno` turns API surface area into usable Bruno requests without guessing, leaking secrets, or running untrusted tooling silently.
+`api-to-bruno` turns API surface area into usable [Bruno](https://www.usebruno.com/docs/introduction) requests without guessing, leaking secrets, or running untrusted tooling silently.
 
 What it does:
 
@@ -80,7 +64,7 @@ Create Bruno requests from https://example.com/openapi.yaml
 Generate a Bruno collection from this NestJS API. Do not run the server.
 ```
 
-## api-to-bruno Discovery
+#### api-to-bruno Discovery
 
 Supported sources:
 
@@ -108,7 +92,7 @@ Source inventory discovery:
 - Go routers such as Gin, Echo, chi, and `net/http`.
 - GraphQL schemas and resolvers.
 
-## api-to-bruno Output
+#### api-to-bruno Output
 
 The generated collection uses Bruno's classic `.bru` format:
 
@@ -124,7 +108,7 @@ bruno/<collection>/
 
 Each request includes a `meta` block and one HTTP method block. Path parameters use Bruno `:param` syntax, query parameters go into `params:query`, and request bodies are included only when the contract or source code supports them.
 
-## Safety Model
+#### Safety Model
 
 The skills in this repository should favor static analysis, explicit user approval, and safe placeholders over silent execution or speculation.
 
@@ -138,6 +122,18 @@ For `api-to-bruno` specifically:
 - Secrets from `.env`, config files, tokens, API keys, or cookies must never be copied into generated requests.
 
 When remote tooling is not approved, `api-to-bruno` generates `.bru` files manually from the contract or route inventory.
+
+## Repository Structure
+
+```text
+.
++-- README.md
++-- LICENSE
+`-- skills/
+    `-- api-to-bruno/
+        +-- SKILL.md
+        `-- BRUNO.md
+```
 
 ## Adding Skills
 
