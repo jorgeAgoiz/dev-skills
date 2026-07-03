@@ -1,5 +1,11 @@
 # dev-skills
 
+## 0.2.3
+
+### Patch Changes
+
+- [#8](https://github.com/jorgeAgoiz/dev-skills/pull/8) [`6f5e16d`](https://github.com/jorgeAgoiz/dev-skills/commit/6f5e16dbb0bc32146b94cbd5dca3d27f21922ed8) Thanks [@jorgeAgoiz](https://github.com/jorgeAgoiz)! - Add `AGENTS.md` with repository guidance for AI coding agents: layout, tooling limits, release flow, and `api-to-bruno` safety rules.
+
 ## 0.2.2
 
 ### Patch Changes
