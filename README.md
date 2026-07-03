@@ -123,6 +123,18 @@ For `api-to-bruno` specifically:
 
 When remote tooling is not approved, `api-to-bruno` generates `.bru` files manually from the contract or route inventory.
 
+#### Security Model for External Sources
+
+To reduce prompt-injection and supply-chain risk when the API source is a Git repository URL or a remote OpenAPI/WSDL URL:
+
+- Only Git hosts `github.com`, `gitlab.com`, and `bitbucket.org` are accepted without explicit confirmation.
+- The cloned ref is pinned and resolved to a commit SHA, which is reported in the final summary.
+- A single file larger than 256 KB is not read into context; multi-file searches cap at 50 candidates.
+- The user is shown the resolved inventory (source, ref, mode, output path, route count, unresolved items) and must approve it before any `.bru` file is written.
+- Generated files are always written outside the cloned repo, and the clone is cleaned up after generation.
+- Raw external content is read only by a subagent that returns a structured summary; the main agent does not ingest the raw file bodies.
+- Local API paths are preferred when both a local path and a remote URL are available.
+
 ## Repository Structure
 
 ```text
